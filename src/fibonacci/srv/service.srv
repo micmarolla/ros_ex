@@ -1,0 +1,4 @@
+uint32 index
+uint32 length
+---
+string out
