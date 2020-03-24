@@ -39,40 +39,40 @@
 class Controller{
 
 private:
-	ros::NodeHandle _nh;
-	actionlib::SimpleActionServer<controller::controlAction> as;
+    ros::NodeHandle _nh;
+    actionlib::SimpleActionServer<controller::controlAction> as;
 
-	controller::controlFeedback feedback;
-	controller::controlResult result;
+    controller::controlFeedback feedback;
+    controller::controlResult result;
 	
-	std::string action_name;
+    std::string action_name;
     float pos;          // current position
     float distance;     // distance to cover
     float velocity;
 
 public:
     // Init
-	Controller(std::string name) :
-			as(_nh, name, boost::bind(&Controller::executeCallback, this, _1), false),
-			action_name(name){
+    Controller(std::string name) :
+            as(_nh, name, boost::bind(&Controller::executeCallback, this, _1), false),
+            action_name(name){
         pos = 0;
-		as.registerPreemptCallback(boost::bind(&Controller::preemptCallback, this));
-		as.start();
-	}
+        as.registerPreemptCallback(boost::bind(&Controller::preemptCallback, this));
+        as.start();
+    }
 
-	void preemptCallback(){
-		ROS_WARN("%s got preempted", action_name.c_str());
-		result.final_pos = pos;
-		as.setPreempted(result, "Preempted");
-	}
+    void preemptCallback(){
+        ROS_WARN("%s got preempted", action_name.c_str());
+        result.final_pos = pos;
+        as.setPreempted(result, "Preempted");
+    }
 
-	void executeCallback(const controller::controlGoalConstPtr &goal){
+    void executeCallback(const controller::controlGoalConstPtr &goal){
         // Check if the action server is active or preempted
-		if(!as.isActive() || as.isPreemptRequested())
-			return;
+        if(!as.isActive() || as.isPreemptRequested())
+            return;
 
-		ros::Rate rate(RATE);     // Control loop at 10 Hz
-		ROS_INFO("%s is processing the goal [%.3f,%.3f,%.3f,%.3f]", action_name.c_str(),
+        ros::Rate rate(RATE);     // Control loop at 10 Hz
+        ROS_INFO("%s is processing the goal [%.3f,%.3f,%.3f,%.3f]", action_name.c_str(),
             goal->des_pos, goal->init_pos, goal->max_vel, goal->time);
 
         // Calculate distance and velocity
@@ -133,7 +133,7 @@ public:
             rate.sleep();
 
         }
-	}
+    }
 
 };
 
