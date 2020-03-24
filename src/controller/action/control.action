@@ -1,0 +1,11 @@
+#goal definition
+float32 des_pos
+float32 init_pos
+float32 max_vel
+float32 time
+---
+#result definition
+float32 final_pos
+---
+#feedback
+float32 current_pos
