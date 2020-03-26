@@ -14,9 +14,7 @@ int main(int argc, char **argv){
 	// Initialize ROS node
 	ros::init(argc, argv, "adder_node1");
 	ros::NodeHandle nh;
-	ros::Publisher pub = nh.advertise<adder::randMsg>("/randTopic", 10);
-
-	ros::Rate rate(10);
+	ros::Publisher pub = nh.advertise<adder::randMsg>("/randTopic", 0);
 	
 	adder::randMsg msg;
 	srand(time(NULL));	// Initialize random seed
@@ -31,7 +29,6 @@ int main(int argc, char **argv){
 		ROS_INFO("%f, %f", msg.data1, msg.data2);
 		pub.publish(msg);
 
-		rate.sleep();
 	}
 
 	return 0;

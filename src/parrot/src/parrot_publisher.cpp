@@ -12,9 +12,7 @@ int main(int argc, char **argv){
 	// Initialize ROS node
 	ros::init(argc, argv, "parrot_publisher");
 	ros::NodeHandle nh;
-	ros::Publisher pub = nh.advertise<std_msgs::String>("/strings", 10);
-
-	ros::Rate rate(10);
+	ros::Publisher pub = nh.advertise<std_msgs::String>("/strings", 0);
 	
 	// Main cycle
 	while(ros::ok()){
@@ -27,7 +25,6 @@ int main(int argc, char **argv){
 		ROS_INFO("%s", msg.data.c_str());
 		pub.publish(msg);
 
-		rate.sleep();
 	}
 
 	return 0;

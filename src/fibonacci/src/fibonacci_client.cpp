@@ -16,7 +16,6 @@ int main(int argc, char **argv){
 	// Initialize ROS and client
 	ros::init(argc, argv, "fibonacci_client");
 	ros::NodeHandle nh;
-	ros::Rate rate(10);
 	ros::ServiceClient client = nh.serviceClient<fibonacci::service>("service");
 
 
@@ -44,7 +43,6 @@ int main(int argc, char **argv){
 		}
 		
 		ros::spinOnce();
-		rate.sleep();
 	}
 	
 	return 0;

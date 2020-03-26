@@ -24,7 +24,7 @@ private:
 // Subscribe to the '/string' topic
 Node2::Node2(){
 	_sub = _nh.subscribe("/randTopic", 0, &Node2::callback, this);
-	_pub = _nh.advertise<adder::respMsg>("/sumTopic", 10);
+	_pub = _nh.advertise<adder::respMsg>("/sumTopic", 0);
 }
 
 // Print received data
