@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<robot name="sliding_kuka" xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find kuka_model_pkg)/urdf/kuka_macro.xacro" />
+    
+    <!-- Define slider -->
+    <xacro:property name="slider_height" value="0.05" />
+    <xacro:property name="slider_width"  value="0.15" />
+    <xacro:property name="slider_length" value="5" />
+    <link name="slider">
+        <visual>
+            <geometry>
+                <box size="${slider_width} ${slider_length} ${slider_height}"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="yellow">
+                <color rgba="1 1 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${slider_width} ${slider_length} ${slider_height}"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="slider_joint" type="prismatic">
+        <parent link="slider" />
+        <child link="base_link" />
+        <origin xyz="0 0 ${base_radius+slider_height/2}" />
+        <axis xyz="0 1 0"/>
+        <!-- Effort and velocity values are made up -->
+        <limit effort="150" velocity="1" lower="-${slider_length/2}" upper="${slider_length/2}"/>
+    </joint>
+    
+    <!-- Include KUKA -->
+    <xacro:include filename="$(find kuka_model_pkg)/urdf/kuka.xacro" />
+</robot>

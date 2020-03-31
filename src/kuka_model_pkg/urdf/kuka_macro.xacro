@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<robot name="kuka_macro" xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:property name="base_length" value="0.2" />
+    <xacro:property name="base_radius" value="0.075" />
+    <xacro:property name="link_length" value="0.2" />
+    <xacro:property name="link_radius" value="0.05" />
+    <xacro:property name="wrist_length" value="0.02" />
+    <xacro:property name="wrist_radius" value="0.02" />
+
+    <xacro:property name="base_geometry">
+        <geometry>
+            <cylinder length="${base_length}" radius="${base_radius}"/>
+        </geometry>
+    </xacro:property>
+
+    <xacro:property name="link_geometry">
+        <geometry>
+            <cylinder length="${link_length}" radius="${link_radius}"/>
+        </geometry>
+    </xacro:property>
+
+    <xacro:property name="wrist_geometry">
+        <geometry>
+            <cylinder length="${wrist_length}" radius="${wrist_radius}"/>
+        </geometry>
+    </xacro:property>
+
+
+    <xacro:macro name="base_link_macro" params="base_link_name">
+        <link name="${base_link_name}">
+            <visual>
+                <xacro:insert_block name="base_geometry" />
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <material name="grey">
+                    <color rgba="0.5 0.5 0.5 1"/>
+                </material>
+            </visual>
+            <collision>
+                <xacro:insert_block name="base_geometry" />
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+            </collision>
+        </link>
+    </xacro:macro>
+
+
+    <!-- Kuka robot only uses revolute joint. However, it's useful to have
+       joint type as a parameter, because exercise n6 uses a prismatic joint -->
+    <xacro:macro name="kuka_joint" params="name type parent child *origin *axis effort vel limit">
+        <joint name="${name}" type="${type}">
+            <parent link="${parent}" />
+            <child link="${child}" />
+            <xacro:insert_block name="origin" />
+            <xacro:insert_block name="axis" />
+            <limit effort="${effort}" velocity="${vel}" lower="-${radians(limit)}" upper="${radians(limit)}"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="kuka_link" params="name *origin">
+        <link name="${name}">
+            <visual>
+                <xacro:insert_block name="link_geometry" />	
+                <xacro:insert_block name="origin" />			
+                <material name="orange">
+                    <color rgba="1 0.5 0 1"/>
+                </material>
+            </visual>
+            <collision>
+                <xacro:insert_block name="link_geometry" />	
+                <xacro:insert_block name="origin" />		
+            </collision>
+        </link>
+    </xacro:macro>	
+
+    <xacro:macro name="kuka_wrist" params="name *origin">
+        <link name="${name}">
+            <visual>
+                <xacro:insert_block name="wrist_geometry" />	
+                <xacro:insert_block name="origin" />			
+                <material name="red">
+                    <color rgba="1 0 0 1"/>
+                </material>
+            </visual>
+            <collision>
+                <xacro:insert_block name="wrist_geometry" />	
+                <xacro:insert_block name="origin" />		
+            </collision>
+        </link>
+    </xacro:macro>
+
+</robot>
