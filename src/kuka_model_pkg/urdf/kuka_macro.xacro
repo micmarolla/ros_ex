@@ -44,11 +44,10 @@
         </link>
     </xacro:macro>
 
-
-    <!-- Kuka robot only uses revolute joint. However, it's useful to have
-       joint type as a parameter, because exercise n6 uses a prismatic joint -->
-    <xacro:macro name="kuka_joint" params="name type parent child *origin *axis effort vel limit">
-        <joint name="${name}" type="${type}">
+    <!-- Since all KUKA joints are revolute, it's not needed to specify the
+        joint type as a parameter -->
+    <xacro:macro name="kuka_joint" params="name parent child *origin *axis effort vel limit">
+        <joint name="${name}" type="revolute">
             <parent link="${parent}" />
             <child link="${child}" />
             <xacro:insert_block name="origin" />

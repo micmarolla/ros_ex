@@ -15,7 +15,6 @@
 	
     <xacro:kuka_joint
         name="joint1"
-        type="revolute"
         parent="base_link"
         child="link1"
         effort="176"
@@ -31,7 +30,6 @@
 
     <xacro:kuka_joint
         name="joint2"
-        type="revolute"
         parent="link1"
         child="link2"
         effort="176"
@@ -47,7 +45,6 @@
 
     <xacro:kuka_joint
         name="joint3"
-        type="revolute"
         parent="link2"
         child="link3"
         effort="110"
@@ -63,7 +60,6 @@
 
     <xacro:kuka_joint
         name="joint4"
-        type="revolute"
         parent="link3"
         child="link4"
         effort="110"
@@ -79,7 +75,6 @@
 
     <xacro:kuka_joint
         name="joint5"
-        type="revolute"
         parent="link4"
         child="link5"
         effort="110"
@@ -95,7 +90,6 @@
 
     <xacro:kuka_joint
         name="joint6"
-        type="revolute"
         parent="link5"
         child="link6"
         effort="40"
@@ -111,7 +105,6 @@
 
     <xacro:kuka_joint
         name="joint7"
-        type="revolute"
         parent="link6"
         child="wrist"
         effort="40"
