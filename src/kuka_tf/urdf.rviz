@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /RobotModel1/Status1
         - /RobotModel1/Links1
         - /TF1
       Splitter Ratio: 0.5
@@ -106,6 +105,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        iiwa_link_ee:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         world:
           Alpha: 1
           Show Axes: false
@@ -137,28 +140,34 @@ Visualization Manager:
           Value: true
         iiwa_link_7:
           Value: true
+        iiwa_link_ee:
+          Value: true
+        world:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        iiwa_link_0:
-          iiwa_link_1:
-            iiwa_link_2:
-              iiwa_link_3:
-                iiwa_link_4:
-                  iiwa_link_5:
-                    iiwa_link_6:
-                      iiwa_link_7:
-                        {}
+        world:
+          iiwa_link_0:
+            iiwa_link_1:
+              iiwa_link_2:
+                iiwa_link_3:
+                  iiwa_link_4:
+                    iiwa_link_5:
+                      iiwa_link_6:
+                        iiwa_link_7:
+                          iiwa_link_ee:
+                            {}
       Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: iiwa_link_0
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
