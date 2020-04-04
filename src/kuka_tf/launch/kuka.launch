@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+
+<launch>
+	<arg name="model" />
+    <param name="robot_description" command="$(find xacro)/xacro $(find kuka_tf)/urdf/kuka_iiwa.xacro" />
+    <!--<param name="use_tf_static" value="false"/>-->
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+	
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find kuka_tf)/urdf.rviz" required="true" />
+
+</launch>
